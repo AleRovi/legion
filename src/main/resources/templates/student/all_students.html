@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset = "utf-8">
+        <title>I miei studenti</title>
+    </head>
+    <body>
+        <h1>Lista degli studenti</h1>
+        <p>Hello     world springmvc</p>
+        <p th:text="'name: ' + ${first_student.firstname} + ' ' + ${first_student.lastname}">name: Ciccio Pasticcio</p>
+        <p th:text="'birthdate: ' + ${first_student.birthdate}"></p>
+        <table>
+            <thead>
+                <tr>
+                    <th>nome</th>
+                    <th>cognome</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Ciccio</td>
+                    <td>Pasticcio</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
