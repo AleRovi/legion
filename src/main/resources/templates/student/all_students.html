@@ -17,9 +17,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Ciccio</td>
-                    <td>Pasticcio</td>
+                <tr th:each="s : ${students}">
+                    <td th:text="${s.firstname}"></td>
+                    <td th:text="${s.lastname}"></td>
+                    <td th:text="${s.birthdate}"></td>
                 </tr>
             </tbody>
         </table>

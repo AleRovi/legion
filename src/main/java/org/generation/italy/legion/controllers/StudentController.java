@@ -2,6 +2,7 @@ package org.generation.italy.legion.controllers;
 
 import org.generation.italy.legion.model.Student;
 import org.generation.italy.legion.model.repositories.abstractions.StudentRepository;
+import org.generation.italy.legion.model.services.abastractions.DidacticService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,16 +14,24 @@ import java.util.Optional;
 @Controller
 @RequestMapping(value = "/student")
 public class StudentController {
-    private StudentRepository repo;
+//    private StudentRepository repo;
+    private DidacticService didacticService;
 
-    public StudentController(StudentRepository repo){
-        this.repo = repo;
-        System.out.println(this.repo.getClass().getName());
+
+//    public StudentController(StudentRepository repo){
+//        this.repo = repo;
+//        System.out.println(this.repo.getClass().getName());
+//    }
+public StudentController( DidacticService didacticService){
+        this.didacticService = didacticService;
+        System.out.println(this.didacticService.getClass().getName());
     }
+
+
     @GetMapping(value = "/list")
     public String getAllStudents(Model model) {
         System.out.println("hello world");
-        List<Student> all = repo.findAll();
+        List<Student> all = didacticService.findAllStudent();
         model.addAttribute("students", all);
         model.addAttribute("first_student", all.get(0));
         return "student/all_students";
