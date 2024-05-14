@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface DidacticService {
      List<Student> findAllStudent();
+     public List<Student> findStudentsByNameLike(String part);
 }

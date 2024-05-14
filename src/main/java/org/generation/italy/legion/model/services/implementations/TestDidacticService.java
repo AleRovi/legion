@@ -13,4 +13,11 @@ public class TestDidacticService implements DidacticService {
     public List<Student> findAllStudent() {
         return null;
     }
+
+    @Override
+    public List<Student> findStudentsByNameLike(String part) {
+        return null;
+    }
+
+
 }

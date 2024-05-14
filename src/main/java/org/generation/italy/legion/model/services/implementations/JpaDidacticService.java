@@ -21,4 +21,11 @@ public class JpaDidacticService implements DidacticService {
     public List<Student> findAllStudent() {
         return studentRepo.findAll();
     }
+
+    @Override
+    public List<Student> findStudentsByNameLike(String part) {
+        return studentRepo.findByFirstnameOrLastnameContaining(part,part);
+    }
+
+
 }

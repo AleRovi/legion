@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,11 +34,21 @@ public StudentController( DidacticService didacticService){
         System.out.println("hello world");
         List<Student> all = didacticService.findAllStudent();
         model.addAttribute("students", all);
-        model.addAttribute("first_student", all.get(0));
         return "student/all_students";
     }
     @GetMapping(value = "/add")
     public String addStudent(){
         return "student/add_student";
+    }
+    @GetMapping(value="/search")
+    public String getAllStudentsContainingPart(Model model,@RequestParam(value="part",defaultValue = "none") String part) {
+        List<Student> all = switch(part) {
+            case "none" -> didacticService.findAllStudent();
+            default -> didacticService.findStudentsByNameLike(part);
+        };
+        System.out.println(part);
+        model.addAttribute("students", all);
+       // model.addAttribute("part", part);
+        return "student/all_students_containing_part";
     }
 }

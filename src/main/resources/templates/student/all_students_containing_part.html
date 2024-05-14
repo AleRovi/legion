@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>I miei studenti</title>
+</head>
+<body>
+<h1>Lista degli studenti</h1>
+<form th:action="@{/student/search}" method="get">
+    <input type="text" id="part" name="part" th:value="${part}">
+    <button type="submit">Invia</button>
+</form>
+<div th:switch="${students}">
+    <h2 th:case="null">No users yet!</h2>
+    <div th:case="*">
+        <table>
+            <thead>
+            <tr>
+                <th>nome</th>
+                <th>cognome</th>
+                <th>data di nascita</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="s : ${students}">
+                <td th:text="${s.firstname}"></td>
+                <td th:text="${s.lastname}"></td>
+                <td th:text="${s.birthdate}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
