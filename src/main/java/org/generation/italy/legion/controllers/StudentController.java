@@ -41,12 +41,11 @@ public StudentController( DidacticService didacticService){
         return "student/add_student";
     }
     @GetMapping(value="/search")
-    public String getAllStudentsContainingPart(Model model,@RequestParam(value="part",defaultValue = "none") String part) {
+    public String getAllStudentsContainingPart(Model model,@RequestParam(name = "part",defaultValue = "") String part) {
         List<Student> all = switch(part) {
-            case "none" -> didacticService.findAllStudent();
+            case "" -> didacticService.findAllStudent();
             default -> didacticService.findStudentsByNameLike(part);
         };
-        System.out.println(part);
         model.addAttribute("students", all);
        // model.addAttribute("part", part);
         return "student/all_students_containing_part";
