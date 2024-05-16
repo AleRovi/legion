@@ -6,6 +6,6 @@ import org.generation.italy.legion.model.WorkExperience;
 import java.util.List;
 
 public interface CurriculumService {
-    List<WorkExperience> getExperiencesFor(long studentId){}
-    List<Education> getEducationFor(long studentId){}
+    List<WorkExperience> getExperiencesFor(long studentId);
+    List<Education> getEducationFor(long studentId);
 }

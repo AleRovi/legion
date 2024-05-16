@@ -14,7 +14,7 @@ public class WorkExperience {
     @ManyToOne
     @JoinColumn(name = "student_id")
     private Student student;
-    private String Workplace;
+    private String workplace;
     @Column(name = "start_date", columnDefinition = "date")
     private LocalDate startDate;
     @Column(name = "end_date", columnDefinition = "date")
@@ -30,7 +30,7 @@ public class WorkExperience {
     }
 
     public String getWorkplace() {
-        return Workplace;
+        return workplace;
     }
 
     public LocalDate getStartDate() {
@@ -43,6 +43,10 @@ public class WorkExperience {
 
     public String getRole() {
         return role;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getDescription() {

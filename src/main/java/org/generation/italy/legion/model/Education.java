@@ -28,6 +28,10 @@ public class Education {
         return student;
     }
 
+    public long getId() {
+        return id;
+    }
+
     public String getSchool() {
         return school;
     }

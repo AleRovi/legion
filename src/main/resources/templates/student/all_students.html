@@ -11,7 +11,7 @@
                 <tr>
                     <th>nome</th>
                     <th>cognome</th>
-                    <th></th>
+                    <th>data di nascita</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,6 +19,7 @@
                     <td th:text="${s.firstname}"></td>
                     <td th:text="${s.lastname}"></td>
                     <td th:text="${s.birthdate}"></td>
+                    <td th:text="${s.email}"></td>
                     <td> link pagina studente, serve id "${s.id}"</td>
                 </tr>
             </tbody>

@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service//segnala che è componente candidata per essere iniettata
 @Profile("dev")
@@ -27,5 +28,8 @@ public class JpaDidacticService implements DidacticService {
         return studentRepo.findByFirstnameOrLastnameContaining(part,part);
     }
 
-
+    @Override
+    public Optional<Student> findStudentById(long id){
+        return studentRepo.findById(id);
+    }
 }
