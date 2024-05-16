@@ -24,6 +24,10 @@ public class Education {
 
     public Education(){}
 
+    public long getId() {
+        return id;
+    }
+
     public Student getStudent() {
         return student;
     }

@@ -1,27 +1,37 @@
 package org.generation.italy.legion.controllers;
 
+import org.generation.italy.legion.model.Education;
 import org.generation.italy.legion.model.Student;
+import org.generation.italy.legion.model.WorkExperience;
+import org.generation.italy.legion.model.services.abstractions.CurriculumService;
 import org.generation.italy.legion.model.services.abstractions.DidacticService;
+import org.generation.italy.legion.viewmodels.CVViewModel;
+import org.generation.italy.legion.viewmodels.EducationViewModel;
+import org.generation.italy.legion.viewmodels.StudentViewModel;
+import org.generation.italy.legion.viewmodels.WorkExperienceViewModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/student")
 public class StudentController {
 //    private StudentRepository repo;
     private DidacticService didacticService;
+    private CurriculumService cvService;
 
 
 //    public StudentController(StudentRepository repo){
 //        this.repo = repo;
 //        System.out.println(this.repo.getClass().getName());
 //    }
-public StudentController( DidacticService didacticService){
+public StudentController(DidacticService didacticService, CurriculumService cvService){
         this.didacticService = didacticService;
+        this.cvService = cvService;
         System.out.println(this.didacticService.getClass().getName());
     }
 
@@ -38,7 +48,20 @@ public StudentController( DidacticService didacticService){
       questo oggetto cvviewmodel lo registro nella classe Model (m.addAttribute()) con una certa chiave
       vado a creare la thymeleaf (studentCV) la quale prenderà i suoi dati dall'oggetto registrato
      */
-    return "studentCV";
+
+        Optional<Student> student = didacticService.findStudentsById(id);
+        if(student.isEmpty()){
+            return "student/all_students";
+        }
+        Student s = student.get();
+        StudentViewModel studentView = new StudentViewModel(s);
+        List<EducationViewModel> eduModels = s.getEduExperiences().stream()
+                .map(EducationViewModel::new).toList();
+        List<WorkExperienceViewModel> workModels = s.getWorkExperiences().stream()
+                .map(WorkExperienceViewModel::new).toList();
+        CVViewModel cv = new CVViewModel(studentView, eduModels, workModels);
+        model.addAttribute("cv", cv);
+        return "studentCV";
     }
 
     @GetMapping(value = "/list")

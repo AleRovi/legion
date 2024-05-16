@@ -7,12 +7,24 @@ import java.util.List;
 
 public class CVViewModel {
     private StudentViewModel student;
-    private List<Education> educations;
-    private List<WorkExperience> experience;
+    private List<EducationViewModel> educations;
+    private List<WorkExperienceViewModel> experiences;
 
-    public CVViewModel(StudentViewModel student, List<Education> educations, List<WorkExperience> experience) {
+    public CVViewModel(StudentViewModel student, List<EducationViewModel> educations, List<WorkExperienceViewModel> experience) {
         this.student = student;
         this.educations = educations;
-        this.experience = experience;
+        this.experiences = experience;
+    }
+
+    public StudentViewModel getStudent() {
+        return student;
+    }
+
+    public List<EducationViewModel> getEducations() {
+        return educations;
+    }
+
+    public List<WorkExperienceViewModel> getExperiences() {
+        return experiences;
     }
 }
