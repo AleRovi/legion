@@ -49,19 +49,19 @@ public StudentController(DidacticService didacticService, CurriculumService cvSe
       vado a creare la thymeleaf (studentCV) la quale prenderà i suoi dati dall'oggetto registrato
      */
 
-        Optional<Student> student = didacticService.findStudentsById(id);
-        if(student.isEmpty()){
+        Optional<Student> s = didacticService.findStudentsById(id);
+        if(s.isEmpty()){
             return "student/all_students";
         }
-        Student s = student.get();
-        StudentViewModel studentView = new StudentViewModel(s);
-        List<EducationViewModel> eduModels = s.getEduExperiences().stream()
+        Student student = s.get();
+        StudentViewModel studentView = new StudentViewModel(student);
+        List<EducationViewModel> eduModels = student.getEduExperiences().stream()
                 .map(EducationViewModel::new).toList();
-        List<WorkExperienceViewModel> workModels = s.getWorkExperiences().stream()
+        List<WorkExperienceViewModel> workModels = student.getWorkExperiences().stream()
                 .map(WorkExperienceViewModel::new).toList();
         CVViewModel cv = new CVViewModel(studentView, eduModels, workModels);
         model.addAttribute("cv", cv);
-        return "studentCV";
+        return "student/student_cv";
     }
 
     @GetMapping(value = "/list")
