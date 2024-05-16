@@ -1,6 +1,7 @@
 package org.generation.italy.legion.controllers;
 
 import org.generation.italy.legion.model.Student;
+import org.generation.italy.legion.model.services.abstractions.CurriculumService;
 import org.generation.italy.legion.model.services.abstractions.DidacticService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,15 +16,17 @@ import java.util.List;
 public class StudentController {
 //    private StudentRepository repo;
     private DidacticService didacticService;
+    private CurriculumService curriculumService;
 
 
 //    public StudentController(StudentRepository repo){
 //        this.repo = repo;
 //        System.out.println(this.repo.getClass().getName());
 //    }
-public StudentController( DidacticService didacticService){
+public StudentController( DidacticService didacticService, CurriculumService curriculumService){
         this.didacticService = didacticService;
         System.out.println(this.didacticService.getClass().getName());
+        this.curriculumService = curriculumService;
     }
 
 
