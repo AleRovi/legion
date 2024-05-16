@@ -1,15 +1,13 @@
 package org.generation.italy.legion.controllers;
 
 import org.generation.italy.legion.model.Student;
-import org.generation.italy.legion.model.repositories.abstractions.StudentRepository;
-import org.generation.italy.legion.model.services.abastractions.DidacticService;
+import org.generation.italy.legion.model.services.abstractions.DidacticService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/student")
@@ -27,6 +25,21 @@ public StudentController( DidacticService didacticService){
         System.out.println(this.didacticService.getClass().getName());
     }
 
+    @GetMapping(value = "/showcv/{id}")
+    public String showCVFor(long id, Model model){
+    /*tramite un servizio ci carichiamo lo studente
+      da questo studente creiamo lo studentviewmodel con i suoi dati
+      tramite un servizio carichiamo la lista delle workexperience di questo studente
+      a partire da questa lista di workexperience creiamo una lista di workexperienceviewmodel
+      tramite un servizio ci carichiamo la lista delle education ddi questo studente
+      a partire da questa lista di education creiamo una lista di educationviewmodel
+      creiamo un cvviewmodel che conterrà studentviewmodel, la lista di workexperienceviewmodel e
+      la lista di educationviewmodel
+      questo oggetto cvviewmodel lo registro nella classe Model (m.addAttribute()) con una certa chiave
+      vado a creare la thymeleaf (studentCV) la quale prenderà i suoi dati dall'oggetto registrato
+     */
+    return "studentCV";
+    }
 
     @GetMapping(value = "/list")
     public String getAllStudents(Model model) {
