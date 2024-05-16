@@ -11,6 +11,7 @@
                 <tr>
                     <th>nome</th>
                     <th>cognome</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -18,6 +19,7 @@
                     <td th:text="${s.firstname}"></td>
                     <td th:text="${s.lastname}"></td>
                     <td th:text="${s.birthdate}"></td>
+                    <td> link pagina studente, serve id "${s.id}"</td>
                 </tr>
             </tbody>
         </table>

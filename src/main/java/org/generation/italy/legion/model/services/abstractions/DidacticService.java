@@ -1,4 +1,4 @@
-package org.generation.italy.legion.model.services.abastractions;
+package org.generation.italy.legion.model.services.abstractions;
 
 import org.generation.italy.legion.model.Student;
 
