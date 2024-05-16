@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 @Profile("test")
 public class TestDidacticService implements DidacticService {
@@ -17,6 +19,11 @@ public class TestDidacticService implements DidacticService {
     @Override
     public List<Student> findStudentsByNameLike(String part) {
         return null;
+    }
+
+    @Override
+    public Optional<Student> findStudentById(long id) {
+        return Optional.empty();
     }
 
 

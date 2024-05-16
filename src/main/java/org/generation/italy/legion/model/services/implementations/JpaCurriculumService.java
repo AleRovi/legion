@@ -6,9 +6,10 @@ import org.generation.italy.legion.model.repositories.abstractions.EducationRepo
 import org.generation.italy.legion.model.repositories.abstractions.StudentRepository;
 import org.generation.italy.legion.model.repositories.abstractions.WorkExperienceRepository;
 import org.generation.italy.legion.model.services.abstractions.CurriculumService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class JpaCurriculumService implements CurriculumService {
     private EducationRepository eduRepo;
     private StudentRepository studentRepo;
@@ -21,11 +22,11 @@ public class JpaCurriculumService implements CurriculumService {
     }
     @Override
     public List<WorkExperience> getExperiencesFor(long studentId) {
-        return List.of();
+        return workRepo.findByStudentId(studentId);
     }
 
     @Override
     public List<Education> getEducationsFor(long studentId) {
-        return List.of();
+        return eduRepo.findByStudentId(studentId);
     }
 }

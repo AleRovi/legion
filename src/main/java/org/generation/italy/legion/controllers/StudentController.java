@@ -1,15 +1,23 @@
 package org.generation.italy.legion.controllers;
 
+import org.generation.italy.legion.model.Education;
 import org.generation.italy.legion.model.Student;
+import org.generation.italy.legion.model.WorkExperience;
 import org.generation.italy.legion.model.services.abstractions.CurriculumService;
 import org.generation.italy.legion.model.services.abstractions.DidacticService;
+import org.generation.italy.legion.viewmodels.CVViewModel;
+import org.generation.italy.legion.viewmodels.EducationViewModel;
+import org.generation.italy.legion.viewmodels.StudentViewModel;
+import org.generation.italy.legion.viewmodels.WorkExperienceViewModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/student")
@@ -29,24 +37,38 @@ public StudentController( DidacticService didacticService, CurriculumService cur
         this.curriculumService = curriculumService;
     }
 
-
-    @GetMapping(value = "/showcv/{id}")
-    public String showCVFor(long id, Model model) {
-        /*
-        tramite un servizio ci carichiamo su lo studente
-        da questo studente creiamo lo StudentViewModel con i suoi dati
-        tramite un servizio ci carichiamo la lista delle WorkExperience di questo studente
-        a partire da questa lista di WorkExperience creiamo una lista di WorkExperienceViewModel
-        tramite un servizio ci carichiamo la lista delle Education di questo studente
-        a partire da questa lista di Education creiamo una lista di EducationViewModel
-        creiamo un CurriculumViewModel che conterrà StudentViewModel, la lista di WorkExperienceViewModel e
-        la lista di EducationViewModel
-        questo oggettoCVViewModel lo registro nella classe Model (m.addAttribute()) con una certa chiave.
-        Vado a creare la thymeleaf (studentCV) la quale prenderà i suoi dati dall'oggetto registrato
-         */
-
-
-        return "studentCV";
+    /*
+            tramite un servizio ci carichiamo su lo studente
+            da questo studente creiamo lo StudentViewModel con i suoi dati
+            tramite un servizio ci carichiamo la lista delle WorkExperience di questo studente
+            a partire da questa lista di WorkExperience creiamo una lista di WorkExperienceViewModel
+            tramite un servizio ci carichiamo la lista delle Education di questo studente
+            a partire da questa lista di Education creiamo una lista di EducationViewModel
+            creiamo un CurriculumViewModel che conterrà StudentViewModel, la lista di WorkExperienceViewModel e
+            la lista di EducationViewModel
+            questo oggettoCVViewModel lo registro nella classe Model (m.addAttribute()) con una certa chiave.
+            Vado a creare la thymeleaf (studentCV) la quale prenderà i suoi dati dall'oggetto registrato
+             */
+    @GetMapping(value="/showcv/{id}")
+    public String showCVFor(@PathVariable("id") long id, Model model) {
+        Optional<Student> os= didacticService.findStudentById(id);
+        if(os.isEmpty()){
+            model.addAttribute("error_message","hai cercato di accedere ad uno studente che non esiste");
+            return "student/error";
+        }
+        StudentViewModel svm=new StudentViewModel(os.get());
+        //List<WorkExperience> we=curriculumService.getExperiencesFor(id);
+        //List<WorkExperienceViewModel> weModel=we.stream().map(w-> new WorkExperienceViewModel(w));
+        List<WorkExperienceViewModel> weModel=curriculumService.getExperiencesFor(id)
+                .stream().map(WorkExperienceViewModel::new).toList();
+        System.out.println(weModel.size());
+        //List<Education> educations=curriculumService.getEducationsFor(id);
+        List<EducationViewModel> eduModel=curriculumService.getEducationsFor(id)
+                .stream().map(EducationViewModel::new).toList();
+        System.out.println(eduModel.size());
+        CVViewModel cv=new CVViewModel(svm,eduModel,weModel);
+        model.addAttribute("cv",cv);
+        return "student/student_cv";
     }
 
 

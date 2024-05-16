@@ -1,0 +1,21 @@
+ol {
+     list-style-type: none ;
+}
+#container {
+    display:flex;
+}
+#info, #experiences {
+    padding: 25px;
+    border: 1px solid;
+    border-radius: 25px;
+    margin:10px;
+}
+#info {
+    flex: 1;
+}
+#experiences {
+    flex: 2;
+}
+header h1, header h2 {
+    text-align: center;
+}
