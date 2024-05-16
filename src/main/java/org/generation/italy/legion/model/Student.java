@@ -15,6 +15,7 @@ public class Student {
     @Column(columnDefinition = "date")
     private LocalDate birthdate;
 
+
     public Student() {
     }
 
@@ -34,5 +35,9 @@ public class Student {
 
     public LocalDate getBirthdate() {
         return birthdate;
+    }
+
+    public long getId() {
+        return id;
     }
 }
