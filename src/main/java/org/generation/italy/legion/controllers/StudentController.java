@@ -1,5 +1,6 @@
 package org.generation.italy.legion.controllers;
 
+import org.generation.italy.legion.model.Curriculum;
 import org.generation.italy.legion.model.Education;
 import org.generation.italy.legion.model.Student;
 import org.generation.italy.legion.model.WorkExperience;
@@ -51,26 +52,35 @@ public StudentController( DidacticService didacticService, CurriculumService cur
              */
     @GetMapping(value="/showcv/{id}")
     public String showCVFor(@PathVariable("id") long id, Model model) {
-        Optional<Student> os= didacticService.findStudentById(id);
-        if(os.isEmpty()){
+        Optional<Curriculum> oc = curriculumService.getCurriculumFor(id);
+        if(oc.isEmpty()){
             model.addAttribute("error_message","hai cercato di accedere ad uno studente che non esiste");
             return "student/error";
         }
-        StudentViewModel svm=new StudentViewModel(os.get());
-        //List<WorkExperience> we=curriculumService.getExperiencesFor(id);
-        //List<WorkExperienceViewModel> weModel=we.stream().map(w-> new WorkExperienceViewModel(w));
-        List<WorkExperienceViewModel> weModel=curriculumService.getExperiencesFor(id)
-                .stream().map(WorkExperienceViewModel::new).toList();
-        System.out.println(weModel.size());
-        //List<Education> educations=curriculumService.getEducationsFor(id);
-        List<EducationViewModel> eduModel=curriculumService.getEducationsFor(id)
-                .stream().map(EducationViewModel::new).toList();
-        System.out.println(eduModel.size());
-        CVViewModel cv=new CVViewModel(svm,eduModel,weModel);
+        CVViewModel cv=new CVViewModel(oc.get());
         model.addAttribute("cv",cv);
         return "student/student_cv";
-    }
 
+//        Optional<Student> os= didacticService.findStudentById(id);
+//        if(os.isEmpty()){
+//            model.addAttribute("error_message","hai cercato di accedere ad uno studente che non esiste");
+//            return "student/error";
+//        }
+//        StudentViewModel svm=new StudentViewModel(os.get());
+//        //List<WorkExperience> we=curriculumService.getExperiencesFor(id);
+//        //List<WorkExperienceViewModel> weModel=we.stream().map(w-> new WorkExperienceViewModel(w));
+//        List<WorkExperienceViewModel> weModel=curriculumService.getExperiencesFor(id)
+//                .stream().map(WorkExperienceViewModel::new).toList();
+//        //List<Education> educations=curriculumService.getEducationsFor(id);
+//        List<EducationViewModel> eduModel=curriculumService.getEducationsFor(id)
+//                .stream().map(EducationViewModel::new).toList();
+//        CVViewModel cv=new CVViewModel(svm,eduModel,weModel);
+//        model.addAttribute("cv",cv);
+//        return "student/student_cv";
+    }
+//    private WorkExperienceViewModel createWorkModel(WorkExperience we){
+//        return new WorkExperienceViewModel(we);
+//    }
 
     @GetMapping(value = "/list")
     public String getAllStudents(Model model) {
