@@ -1,0 +1,23 @@
+img {
+    height: 300px;
+
+}
+
+body{
+    background-color: rgba(0, 0, 0, 0.925);
+}
+
+.title {
+    color: green;
+    border: 25px solid grey;
+    font-family: cursive;
+    border-radius: 5px;
+}
+
+.work {
+    margin-block-start: 30px;
+    color: green;
+    border: 5px solid grey;
+    font-family:'Times New Roman', Times, serif;
+    border-radius: 5px;
+}

@@ -11,6 +11,7 @@ import org.generation.italy.legion.viewmodels.WorkExperienceViewModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -36,26 +37,18 @@ public StudentController(DidacticService didacticService,CurriculumService cvSer
         System.out.println(this.cvService.getClass().getName());
     }
 
-    @GetMapping(value = "showcv/{id}")
-    public String showCVFor(long id, Model model){
-        //tramite un servizio ci carichiamo uno studente,
-        //da questo s creiamo uno studentviewmodel con i dati dello s
-        //tramite un servizio ci carichiamo la lista delle workex di s
-        //a partire da questa lista creiamo una lista di workexviewmodel
-        //la stessa cosa con education (usiamo lo stesso servizio)
-        //creiamo un cvviewmodel che contiene le due liste viewmodel
-        //questo oggetto cvviewmodel va registrato nel model per collegarlo con la view (model.addAttribute)
-        //poi creare la thymeleaf studentcv che prenderà da qui gli oggetti dinamici
+    @GetMapping(value = "/showcv/{id}")
+    public String showCVFor(@PathVariable("id") long id, Model model){
         Optional<Student> os = didacticService.findStudentById(id);
         if(os.isEmpty()){
-            return "student/all_students";
+            model.addAttribute("error_message", "lo studente non esiste");
+            return "student/error";
         }
         Student student = os.get();
-        StudentViewModel studentview = new StudentViewModel(student);
-        List<EducationViewModel> eduModels = student.getEduExperiences().stream()
-                .map(EducationViewModel::new).toList();
+        StudentViewModel studentView = new StudentViewModel(student);
+        List<EducationViewModel> eduModels = student.getEduExperiences().stream().map(e->new EducationViewModel(e)).toList();
         List<WorkExperienceViewModel> workModels = student.getWorkExperiences().stream().map(WorkExperienceViewModel::new).toList();
-        CVViewModel cvModel = new CVViewModel(studentview,eduModels, workModels);
+        CVViewModel cvModel = new CVViewModel(studentView,eduModels, workModels);
         model.addAttribute("cv", cvModel);
         return "student/student_cv";
     }

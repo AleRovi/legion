@@ -26,7 +26,7 @@ public class StudentViewModel {
 
     public StudentViewModel(Student s){
         this.id = s.getId();
-        this.birthdate = s.getBirthdate().format(DateTimeFormatter.ofPattern("yyy-MM-dd")); //serve un metodo per formattare la data
+        this.birthdate = s.getBirthdate().format(DateTimeFormatter.ofPattern("yyy-MM-dd"));
         this.fullname  = s.getFirstname() + " " + s.getLastname();
         this.phone = s.getPhone();
         this.email = s.getEmail();

@@ -24,11 +24,11 @@ public class JpaCurriculumService implements CurriculumService {
 
     @Override
     public List<WorkExperience> getExperiencesFor(long studentId) {
-        return null;
+        return workRepo.findByStudentId(studentId);
     }
 
     @Override
     public List<Education> getEducationFor(long studentId) {
-        return null;
+        return eduRepo.findByStudentId(studentId);
     }
 }

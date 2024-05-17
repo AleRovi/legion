@@ -20,7 +20,7 @@
                     <td th:text="${s.lastname}"></td>
                     <td th:text="${s.birthdate}"></td>
                     <td th:text="${s.email}"></td>
-                    <td> link pagina studente, serve id "${s.id}"</td>
+                    <td> <a th:href="@{/showcv/{id}(id=${s.id})}"> CV </a> </td>
                 </tr>
             </tbody>
         </table>

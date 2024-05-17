@@ -1,9 +1,7 @@
 package org.generation.italy.legion.viewmodels;
 
-import jakarta.persistence.Column;
 import org.generation.italy.legion.model.WorkExperience;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class WorkExperienceViewModel {
