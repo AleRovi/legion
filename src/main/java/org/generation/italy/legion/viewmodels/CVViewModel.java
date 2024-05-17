@@ -7,6 +7,21 @@ public class CVViewModel {
     private List<EducationViewModel> educations;
     private List<WorkExperienceViewModel> experiences;
 
+    public CVViewModel(StudentViewModel student, List<EducationViewModel> educations, List<WorkExperienceViewModel> experiences) {
+        this.student = student;
+        this.educations = educations;
+        this.experiences = experiences;
+    }
 
+    public StudentViewModel getStudent() {
+        return student;
+    }
 
+    public List<EducationViewModel> getEducations() {
+        return educations;
+    }
+
+    public List<WorkExperienceViewModel> getExperiences() {
+        return experiences;
+    }
 }

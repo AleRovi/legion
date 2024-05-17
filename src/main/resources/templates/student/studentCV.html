@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Curriculum Vitae</title>
+</head>
+<body>
+
+<div class="container">
+    <header class="header">
+        <div>
+            <h1 th:text = "${cv.student.fullname}"></h1>
+            <p th:text = "'Email:' + ${cv.student.email} + ' | Telefono:' + ${cv.student.phoneNumber}"></p>
+            <p th:text = "'Indirizzo:' + ${cv.student.address}"></p>
+        </div>
+    </header>
+
+    <section class="section profile">
+        <h2>Profilo</h2>
+
+    </section>
+
+    <section class="section experience">
+        <h2>Esperienze Professionali</h2>
+        <ul>
+            <li th:each = "we : ${cv.experiences}">
+                <h3 th:text = "${we.titleExperience}"></h3>
+                <p th:text = "${we.startDate} + '-'+ ${we.endDate}"></p>
+                <p th:text = "${we.position}"></p>
+            </li>
+        </ul>
+    </section>
+
+    <section class="section education">
+        <h2>Formazione</h2>
+        <ul>
+            <li th:each = "ed : ${cv.educations}">
+                <h3 th:text = "${ed.titleEducation}"></h3>
+                <p th:text = "${ed.startDate} + '-'+ ${ed.endDate}"></p>
+                <p th:text = "${ed.description}"></p>
+            </li>
+        </ul>
+    </section>
+</div>
+
+</body>
+</html>

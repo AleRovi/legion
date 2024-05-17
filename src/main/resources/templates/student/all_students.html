@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset = "utf-8">
-        <title>I miei studenti</title>
-    </head>
-    <body>
-        <h1>Lista degli studenti</h1>
+<head>
+    <meta charset="utf-8">
+    <title>I miei studenti</title>
+</head>
+<body>
+<h1>Lista degli studenti</h1>
+<form th:action="@{/student/search}" method="get">
+    <input type="text" id="part" name="part" th:value="${part}">
+    <button type="submit">Invia</button>
+</form>
+<div th:switch="${students}">
+    <h2 th:case="null">No users yet!</h2>
+    <div th:case="*">
         <table>
             <thead>
-                <tr>
-                    <th>nome</th>
-                    <th>cognome</th>
-                    <th></th>
-                </tr>
+            <tr>
+                <th>nome</th>
+                <th>cognome</th>
+                <th>data di nascita</th>
+                <th></th>
+            </tr>
             </thead>
             <tbody>
-                <tr th:each="s : ${students}">
-                    <td th:text="${s.firstname}"></td>
-                    <td th:text="${s.lastname}"></td>
-                    <td th:text="${s.birthdate}"></td>
-                    <td>${s.id}</td>
-                </tr>
+            <tr th:each="s : ${students}">
+                <td th:text="${s.firstname}"></td>
+                <td th:text="${s.lastname}"></td>
+                <td th:text="${s.birthdate}"></td>
+                <td><a th:href="@{/student/showcv/{id}(id = ${s.id})}">Curriculum</a></td>
+            </tr>
             </tbody>
         </table>
-    </body>
+    </div>
+</div>
+</body>
 </html>
