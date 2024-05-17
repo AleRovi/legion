@@ -1,0 +1,106 @@
+@font-face{
+    font-family: 'Font Awesome 4';
+    src:url('/css/font_awesome/font-awesome-4.7.0/fonts/fontawesome-webfont.woff2')format('woff2'),
+        url('/css/font_awesome/font-awesome-4.7.0/fonts/fontawesome-webfont.woff')format('woff');
+    font-style: normal;
+    font-weight: normal;
+}
+
+
+
+#importante{
+    font-weight: bold;
+    font-style: italic;
+}
+
+body {
+    background-color: whitesmoke;
+}
+
+h1, h6{
+   text-align: right;
+   margin-right: 10px;
+}
+
+nav {
+    text-align: right;
+    margin-top: -30px;
+    margin-right: 10px;
+}
+
+img{
+    padding: 50px;
+    margin-bottom: -50px;
+    margin-top: -50px;
+    justify-content: center;
+}
+
+ol {
+    list-style-type:circle;
+}
+
+#container{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#right{
+    flex: 2;
+    margin: 50px;
+    margin-top: 150px;
+}
+
+#left{
+    flex: 1;
+    border: 2px solid;
+    border-color: rgb(203, 196, 235);
+    padding: 25px;
+    border-radius: 30px;
+    margin: 50px;
+    margin-top: -10px;
+    background-color: rgb(203, 196, 235);
+}
+
+#left p, #left footer, #left section{
+    color: rgb(77, 64, 136);
+}
+
+#left p{
+    padding: 40px;
+    font-size: large;
+    margin-top: -30px;
+}
+
+#left footer{
+    margin-top: -40px;
+}
+
+#address::before {
+    content: "\f015";
+    font-family: 'Font Awesome 4';
+    margin-right: 5px;
+}
+
+#phone::before {
+    content: "\f095";
+    font-family: 'Font Awesome 4';
+    margin-right: 5px;
+}
+#birthdate::before {
+    content: "\f1fd";
+    font-family: 'Font Awesome 4';
+    margin-right: 5px;
+}
+#email::before {
+    content: "\f0e0"; /* Email icon */
+    font-family: 'Font Awesome 4';
+    margin-right: 5px;
+}
+
+#info{
+    list-style-type: none;
+}
+
+hr{
+    color: blue;
+}

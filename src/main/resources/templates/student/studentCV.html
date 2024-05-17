@@ -1,0 +1,126 @@
+<!--2 pagine: 1) curriculum futuro 2) portfolio -->
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esempio CV</title>
+
+    <link rel="stylesheet" href="/css/font_awesome/font-awesome-4.7.0/css/font-awesome.min.css">
+
+
+    <link rel="stylesheet" href="/css/curriculum.css">
+</head>
+<body>
+<header>
+    <h6>Curriculum Vitae</h6>
+</header>
+<nav>
+    <a href="internal/portfolio.html">Portfolio</a>
+</nav>
+<div id="container">
+    <div id="right">
+        <h1 th:text="${CV.student.fullname}">Roberto Pantoni</h1>
+        <hr>
+        <section>
+            <h2>Esperienze</h2>
+            <ol>
+                <li th:each="we : ${CV.experiences}">
+                    <div>
+                        <div>
+                            <time th:text="${we.startDate}" th:attr="datetime=${we.startDateIso}">Mar 2021</time>-<time th:text="${we.endDate}" th:attr="datetime=${we.endDateIso}">Mar 2024</time>
+                        </div>
+                        <div>
+                            <h3 th:text="${we.position}">Operatore Call Center - Gruppo Distribuzione s.p.a.</h3>
+                            <p th:text="${we.salary}">Salario</p>
+                        </div>
+                        <div>
+                            <h4>Roma, Italia</h4>
+                        </div>
+                        <div>
+                            <p>
+                                Esperienza di apprendistato durante la quale ho gestito tramite
+                                contatti mail richieste e problematiche relative alle spedizioni
+                                per conto di Poste Italiane. Ho imparato a relazionarmi con i
+                                commerciali delle aziende clienti, sia italiane che estere, e ho
+                                acquisito dimestichezza nell’uso lavorativo del computer e nel
+                                lavoro in gruppo
+                            </p>
+                        </div>
+                    </div>
+                </li>
+
+            </ol>
+            <hr>
+        </section>
+        <section>
+            <h2>Formazione</h2>
+            <ol>
+                <li th:each="ed : ${CV.educations}">
+                    <div>
+                        <time th:text="${ed.startDate}" th:attr="datetime=${ed.startDateIso}">Mar 2024</time>-<time th:text="${ed.endDate}" th:attr="datetime=${ed.endDateIso}">Giu 2024</time>
+                    </div>
+                    <div>
+                        <h3 th:text="${ed.title}">Corso per Junior Java Developer - Generation Italy</h3>
+                    </div>
+                    <div>
+                        <h4>Roma, Italia</h4>
+                    </div>
+                    <div>
+                        <h3 th:text="${ed.area}">Test Area</h3>
+                        <p>
+                            Corso di formazione intensivo della durata di tre mesi organizzato
+                            da Generation Italy in collaborazione con Intesa Sanpaolo. Grazie
+                            al corso ho appreso la programmazione in Java, JavaScript, MySQL,
+                            HTML e altro, e praticato Agile/Scrum. Mi sono anche allenato sulle
+                            soft skill fondamentali per una completa efficacia nel mio lavoro
+                            come la responsabilità personale ed il problem solving e ho
+                            migliorato la mia comunicazione e la capacità di lavorare in gruppo
+                        </p>
+                    </div>
+                </li>
+            </ol>
+        </section>
+    </div>
+    <div id="left">
+        <main>
+            <img src="img/foto_Robbie.png" alt="foto curriculum" height="200px">
+            <p th:text="${CV.student.coverLetterText}">
+                Sono determinato, organizzato e socievole. Ho deciso di lavorare come programmatore informatico e per
+                questo ho dedicato i mesi appena trascorsi alla mia formazione.
+            </p>
+        </main>
+        <footer>
+            <ul id="info">
+                <li id="address"><span th:text="${CV.student.city}">Text city</span> <span th:text="${CV.student.country}">Test country</span></li>
+                <li id="phone">3336851212</li>
+                <li id="birthdate" th:text="${CV.student.birthdate}">16 Settembre 1998</li>
+                <li id="email">rob.pantoni@gmail.com</li>
+            </ul>
+            <hr>
+        </footer>
+        <section>
+            <h2>Skills</h2>
+            <ul>
+                <li>Java</li>
+                <li>JavaScript</li>
+                <li>SQL</li>
+                <li>HTML</li>
+                <li>Esperienza con applicazioni Microsoft</li>
+            </ul>
+            <hr>
+        </section>
+        <section>
+            <h2>Lingue</h2>
+            <ul>
+                <li>Italiano | Madrelingua</li>
+                <li>Inglese | Intermedio</li>
+                <li>Spagnolo | Base</li>
+            </ul>
+        </section>
+    </div>
+
+
+</div>
+</body>
+</html>
